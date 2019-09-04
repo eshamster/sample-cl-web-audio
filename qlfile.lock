@@ -1,0 +1,12 @@
+("quicklisp" .
+ (:class qlot.source.ql:source-ql-all
+  :initargs (:project-name "quicklisp" :%version :latest)
+  :version "2018-02-28"))
+("ps-experiment" .
+ (:class qlot.source.github:source-github
+  :initargs (:project-name "ps-experiment" :repos "eshamster/ps-experiment" :ref nil :branch nil :tag nil)
+  :version "github-7f3b9a087f87bfa3432e5882332dacd6027bf1d6"
+  :repos "eshamster/ps-experiment"
+  :url "https://github.com/eshamster/ps-experiment/archive/7f3b9a087f87bfa3432e5882332dacd6027bf1d6.tar.gz"
+  :ref "7f3b9a087f87bfa3432e5882332dacd6027bf1d6")) 
+
