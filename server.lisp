@@ -52,6 +52,7 @@
                     (:title "sample-cl-web-audio"))
                    (:body
                     (:h1 "Hello Web Audio API")
+                    (:h2 "Base Oscillator")
                     (:table
                      (:tr (:td "Type")
                           (:td (:select :id "type"
@@ -71,6 +72,20 @@
                                        :min 0 :max 1 :step 0.01 :value 0.5
                                        :oninput setup-func))
                           (:td :id "leveldisp" 0.5)))
+
+                    (:h2 "LFO Oscillator (Vibrato)")
+                    (:table
+                     (:tr (:td "Freq(Hz)")
+                          (:td (:input :type "range" :id "lfo-freq"
+                                       :min 0.1 :max 20 :step 0.1 :value 5
+                                       :oninput setup-func))
+                          (:td :id "lfo-freqdisp" 5))
+                     (:tr (:td "Depth")
+                          (:td (:input :type "range" :id "lfo-depth"
+                                       :min 0 :max 100 :value 10
+                                       :oninput setup-func))
+                          (:td :id "lfo-depthdisp" 10)))
+
                     (:button :onclick (funcall-to-full-js-string 'play) "Play")
                     (:script :src "js/main.js" nil)))))))
 
