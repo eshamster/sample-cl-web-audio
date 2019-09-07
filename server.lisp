@@ -5,7 +5,8 @@
   (:export :start
            :stop)
   (:import-from :sample-cl-web-audio/js
-                :play)
+                :play
+                :setup)
   (:import-from :ps-experiment
                 :funcall-to-full-js-string))
 (in-package :sample-cl-web-audio/server)
@@ -45,11 +46,31 @@
         (declare (ignorable params))
         (make-js-main-file)
         (with-output-to-string (str)
-          (let ((cl-markup:*output-stream* str))
+          (let ((cl-markup:*output-stream* str)
+                (setup-func (funcall-to-full-js-string 'setup)))
             (html5 (:head
                     (:title "sample-cl-web-audio"))
                    (:body
-                    (:h1 "Hello ps-experiment!!")
+                    (:h1 "Hello Web Audio API")
+                    (:table
+                     (:tr (:td "Type")
+                          (:td (:select :id "type"
+                                        :onchange setup-func
+                                        (:option :value "sine"     "Sine")
+                                        (:option :value "square"   "Square")
+                                        (:option :value "sawtooth" "SawTooth")
+                                        (:option :value "triangle" "Triangle")))
+                          (:td nil))
+                     (:tr (:td "Freq(Hz)")
+                          (:td (:input :type "range" :id "freq"
+                                       :min 50 :max 3000 :value 440
+                                       :oninput setup-func))
+                          (:td :id "freqdisp" 440))
+                     (:tr (:td "Level")
+                          (:td (:input :type "range" :id "level"
+                                       :min 0 :max 1 :step 0.01 :value 0.5
+                                       :oninput setup-func))
+                          (:td :id "leveldisp" 0.5)))
                     (:button :onclick (funcall-to-full-js-string 'play) "Play")
                     (:script :src "js/main.js" nil)))))))
 
