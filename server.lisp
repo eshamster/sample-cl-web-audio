@@ -3,7 +3,11 @@
         :cl-markup
         :sample-cl-web-audio/js)
   (:export :start
-           :stop))
+           :stop)
+  (:import-from :sample-cl-web-audio/js
+                :play)
+  (:import-from :ps-experiment
+                :funcall-to-full-js-string))
 (in-package :sample-cl-web-audio/server)
 
 ;; --- Definitions about directories --- ;;
@@ -46,7 +50,7 @@
                     (:title "sample-cl-web-audio"))
                    (:body
                     (:h1 "Hello ps-experiment!!")
-                    (:button :onclick "sampleClWebAudio_js.play()" "Play")
+                    (:button :onclick (funcall-to-full-js-string 'play) "Play")
                     (:script :src "js/main.js" nil)))))))
 
 (defun stop ()
