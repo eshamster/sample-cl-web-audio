@@ -16,6 +16,7 @@
   :license "MIT"
   :depends-on (:parenscript
                :ps-experiment
+               :alexandria
                :ningle
                :cl-markup
                :clack

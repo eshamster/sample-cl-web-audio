@@ -1,10 +1,14 @@
-(defpackage sample-cl-web-audio/js
+(defpackage sample-cl-web-audio/js/simple
   (:use :cl
         :ps-experiment
         :parenscript)
   (:export :play
-           :setup))
-(in-package :sample-cl-web-audio/js)
+           :setup)
+  (:import-from :sample-cl-web-audio/js/utils
+                :get-elem
+                :get-value
+                :set-inner))
+(in-package :sample-cl-web-audio/js/simple)
 
 (enable-ps-experiment-syntax)
 
@@ -45,26 +49,20 @@
 
 (defun.ps setup ()
   (init-if-required)
-  (labels ((get-elem (id)
-             (#j.document.getElementById# id))
-           (get-value (id)
-             (@ (get-elem id) value))
-           (set-inner (id value)
-             (setf (@ (get-elem id) #j.innerHTML#)
-                   value)))
-    ;; Setup *osc*
-    (let ((type  (get-value "type"))
-          (freq  (get-value "freq"))
-          (level (get-value "level")))
-      (set-inner "freqdisp"  freq)
-      (set-inner "leveldisp" level)
-      (setf *osc*.type            type
-            *osc*.frequency.value freq
-            *gain*.gain.value     level))
+  ;; Setup *osc*
+  (let ((type  (get-value "type"))
+        (freq  (get-value "freq"))
+        (level (get-value "level")))
+    (set-inner "freqdisp"  freq)
+    (set-inner "leveldisp" level)
+    (setf *osc*.type            type
+          *osc*.frequency.value freq
+          *gain*.gain.value     level))
     ;; Setup *lfo*
-    (let ((lfo-freq  (get-value "lfo-freq"))
-          (lfo-depth (get-value "lfo-depth")))
-      (set-inner "lfo-freqdisp"  lfo-freq)
-      (set-inner "lfo-depthdisp" lfo-depth)
-      (setf *lfo*.frequency.value lfo-freq
-            *depth*.gain.value    lfo-depth))))
+
+  (let ((lfo-freq  (get-value "lfo-freq"))
+        (lfo-depth (get-value "lfo-depth")))
+    (set-inner "lfo-freqdisp"  lfo-freq)
+    (set-inner "lfo-depthdisp" lfo-depth)
+    (setf *lfo*.frequency.value lfo-freq
+          *depth*.gain.value    lfo-depth)))
