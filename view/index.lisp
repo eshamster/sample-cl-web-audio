@@ -16,5 +16,5 @@
                (:body
                 (:div "This sample refers to "
                       (:a :href ref-url :target "_blank" ref-url))
-                (:ul (dolist (sample (list "simple" "automation"))
+                (:ul (dolist (sample (list "simple" "automation" "biquad-filter"))
                        (markup (:li (:a :href (format nil "/~A" sample) sample)))))))))))

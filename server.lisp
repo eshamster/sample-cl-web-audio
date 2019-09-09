@@ -9,6 +9,8 @@
                 :make-simple-router)
   (:import-from :sample-cl-web-audio/view/automation
                 :make-automation-router)
+  (:import-from :sample-cl-web-audio/view/biquad-filter
+                :make-biquad-filter-router)
   (:import-from :alexandria
                 :make-keyword))
 (in-package :sample-cl-web-audio/server)
@@ -57,6 +59,12 @@
       (lambda (params)
         (make-js-main-file :automation)
         (funcall (make-automation-router :js-path "js/main.js")
+                 params)))
+
+(setf (ningle:route *app* "/biquad-filter" :method :GET)
+      (lambda (params)
+        (make-js-main-file :biquad-filter)
+        (funcall (make-biquad-filter-router :js-path "js/main.js")
                  params)))
 
 (defun stop ()
