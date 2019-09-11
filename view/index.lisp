@@ -19,5 +19,6 @@
                 (:ul (dolist (sample (list "simple"
                                            "automation"
                                            "biquad-filter"
-                                           "custom-waveform"))
+                                           "custom-waveform"
+                                           "wave-shaper"))
                        (markup (:li (:a :href (format nil "/~A" sample) sample)))))))))))

@@ -13,6 +13,8 @@
                 :make-biquad-filter-router)
   (:import-from :sample-cl-web-audio/view/custom-waveform
                 :make-custom-waveform-router)
+  (:import-from :sample-cl-web-audio/view/wave-shaper
+                :make-wave-shaper-router)
   (:import-from :alexandria
                 :make-keyword))
 (in-package :sample-cl-web-audio/server)
@@ -73,6 +75,12 @@
       (lambda (params)
         (make-js-main-file :custom-waveform)
         (funcall (make-custom-waveform-router :js-path "js/main.js")
+                 params)))
+
+(setf (ningle:route *app* "/wave-shaper" :method :GET)
+      (lambda (params)
+        (make-js-main-file :wave-shaper)
+        (funcall (make-wave-shaper-router :js-path "js/main.js")
                  params)))
 
 (defun stop ()
