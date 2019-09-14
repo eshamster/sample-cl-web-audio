@@ -15,6 +15,8 @@
                 :make-custom-waveform-router)
   (:import-from :sample-cl-web-audio/view/wave-shaper
                 :make-wave-shaper-router)
+  (:import-from :sample-cl-web-audio/view/compressor
+                :make-compressor-router)
   (:import-from :alexandria
                 :make-keyword))
 (in-package :sample-cl-web-audio/server)
@@ -81,6 +83,12 @@
       (lambda (params)
         (make-js-main-file :wave-shaper)
         (funcall (make-wave-shaper-router :js-path "js/main.js")
+                 params)))
+
+(setf (ningle:route *app* "/compressor" :method :GET)
+      (lambda (params)
+        (make-js-main-file :compressor)
+        (funcall (make-compressor-router :js-path "js/main.js")
                  params)))
 
 (defun stop ()

@@ -12,7 +12,7 @@
   (lambda (params)
     (declare (ignore params))
     (with-cl-markup ()
-      (let ((title "Wave Sh")
+      (let ((title "Wave Shaper")
             (ref-url "https://www.g200kg.com/jp/docs/webaudio/waveshaper.html"))
         (html5 (:head
                 (:title title))

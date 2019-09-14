@@ -20,5 +20,6 @@
                                            "automation"
                                            "biquad-filter"
                                            "custom-waveform"
-                                           "wave-shaper"))
+                                           "wave-shaper"
+                                           "compressor"))
                        (markup (:li (:a :href (format nil "/~A" sample) sample)))))))))))
