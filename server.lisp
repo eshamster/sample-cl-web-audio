@@ -17,6 +17,8 @@
                 :make-wave-shaper-router)
   (:import-from :sample-cl-web-audio/view/compressor
                 :make-compressor-router)
+  (:import-from :sample-cl-web-audio/view/panner
+                :make-panner-router)
   (:import-from :alexandria
                 :make-keyword))
 (in-package :sample-cl-web-audio/server)
@@ -89,6 +91,12 @@
       (lambda (params)
         (make-js-main-file :compressor)
         (funcall (make-compressor-router :js-path "js/main.js")
+                 params)))
+
+(setf (ningle:route *app* "/panner" :method :GET)
+      (lambda (params)
+        (make-js-main-file :panner)
+        (funcall (make-panner-router :js-path "js/main.js")
                  params)))
 
 (defun stop ()
